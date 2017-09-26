@@ -36,6 +36,7 @@ form {
   border-radius: 6px;
   margin: 0;
   padding: 10px;
+  display: flex;
 }
 
 button {
@@ -54,12 +55,13 @@ input {
   border-radius: 3px;
   font-size: 15px;
   padding: 5px;
+  margin-right: 10px;
 }
 
 #initials {
-  width: 40px;
+  max-width: 40px;
 }
 
 #message {
-  width: 315px;
+  flex: 1;
 }
