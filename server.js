@@ -26,6 +26,18 @@ function registerBotMsg(msg) {
   io.emit('message', msg);
 }
 
+// Return JSON object with local weather information
+function getWeather(callback) {
+  // This is the "curl" part of the JS function
+  var request = require('request');
+  request.get("https://www.metaweather.com/api/location/4118/", function (error, response) {
+    if (!error && response.statusCode == 200) {
+      var data = JSON.parse(response.body);
+      callback(data.consolidated_weather[0].weather_state_name);
+    }
+  })
+}
+
 // server receiving messages from all connected clients upon connection
 io.on('connection', function (socket) {
   // populate new user's message history
@@ -41,16 +53,23 @@ io.on('connection', function (socket) {
     history.push(msg);
 
     // Answer with time if asked
-    if (!isQuestion(msg)) {
-      io.emit('message', msg);
-    } else if (askingTime(msg)) {
+    if (askingTime(msg)) {
       io.emit('message', msg);
       registerBotMsg("Bot: " + new Date);
+    } else if (!isQuestion(msg)) {
+      io.emit('message', msg);
     } else {
       io.emit('message', msg);
       registerBotMsg("Bot: Sorry, I don't know the answer to that.");
     }
   });
+
+  // #TODO: Clear message history upon empty chatroom.
+  // socket.on('disconnect', (reason) => {
+  //   console.log('Disconnected.');
+  //   // Check if room is empty
+  //   console.log(namespace.clients.length);
+  // })
 });
 
 server.listen(8080, function() {
