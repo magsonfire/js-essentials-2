@@ -1,21 +1,26 @@
-<link rel="stylesheet" href="style.css">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Maggie's First Chat Room App</title>
+</head>
 
+<body>
+  <div class="intro">
+    <h1>Chat Room</h1>
 
-<h1>Awesome Chat Room</h1>
+    <p>Welcome to my chat room! There is a bot available to answer common queries (e.g. time, weather). Test it out!</p>
+</div>
 
-<main>
-  <ol id="history">
-    <li>Juan: Welcome to my Chat room</li>
-    <li>Everyone: Thank you!</li>
-    <li>Juan: Hey this is not real</li>
-  </ol>
-  <form>
-    <input id="initials" required>
-    <input id="message">
-    <button>Send!</button>
-  </form>
-</main>
-
+  <main>
+    <ol id="history">
+      <li>Bot: Hello! I'm a bot. I can answer some simple questions.</li>
+    </ol>
+    <form>
+      <input id="initials" required>
+      <input id="message">
+      <button>Send!</button>
+    </form>
+  </main>
+</body>
 
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 <script src="/socket.io/socket.io.js"></script>
